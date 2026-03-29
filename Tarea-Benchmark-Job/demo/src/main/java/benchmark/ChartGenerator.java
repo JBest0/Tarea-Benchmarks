@@ -36,6 +36,7 @@ import org.json.simple.parser.ParseException;
 public final class ChartGenerator {
     private static final int[] SIZES = {10, 100, 1000, 10000};
 
+    // Se agregan las nuevas operaciones de escenarios al grafico
     private static final String[] TIME_OPERATIONS = {
             "insertFirst",
             "insertLast",
@@ -43,21 +44,35 @@ public final class ChartGenerator {
             "delete",
             "search",
             "get",
-            "replace"
+            "replace",
+            "insertar_accion",
+            "deshacer_accion",
+            "insertar_cliente",
+            "atender_cliente"
     };
 
-    private static final String[] STRUCTURES = {"array", "singly", "doubly"};
+    // Se agregan las estructuras
+    private static final String[] STRUCTURES = {"array", "singly", "doubly", "stack_array", "stack_list", "queue_array", "queue_list"};
 
     private static final Map<String, String> DISPLAY_NAMES = Map.of(
             "array", "Array",
             "singly", "Singly Linked List",
-            "doubly", "Doubly Linked List"
+            "doubly", "Doubly Linked List",
+            "stack_array", "Stack (Array)",
+            "stack_list", "Stack (List)",
+            "queue_array", "Queue (Array)",
+            "queue_list", "Queue (List)"
     );
 
+    // Se asignan colores adicionales
     private static final Map<String, Color> SERIES_COLORS = Map.of(
             "array", Color.decode("#2196F3"),
             "singly", Color.decode("#F44336"),
-            "doubly", Color.decode("#4CAF50")
+            "doubly", Color.decode("#4CAF50"),
+            "stack_array", Color.decode("#9C27B0"),
+            "stack_list", Color.decode("#FF9800"),
+            "queue_array", Color.decode("#00BCD4"),
+            "queue_list", Color.decode("#795548")
     );
 
     private static final Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 14);
@@ -69,12 +84,20 @@ public final class ChartGenerator {
 
     public static void generate() {
         Path resultsDir = Path.of("results");
+        
+        // Agregamos las validaciones de los nuevos JSON
         Path arrayPath = resultsDir.resolve("array.json");
         Path singlyPath = resultsDir.resolve("singly.json");
         Path doublyPath = resultsDir.resolve("doubly.json");
+        Path stackArrayPath = resultsDir.resolve("stack_array.json");
+        Path stackListPath = resultsDir.resolve("stack_list.json");
+        Path queueArrayPath = resultsDir.resolve("queue_array.json");
+        Path queueListPath = resultsDir.resolve("queue_list.json");
 
-        if (!Files.exists(arrayPath) || !Files.exists(singlyPath) || !Files.exists(doublyPath)) {
-            System.out.println("No se encontraron todos los archivos JSON requeridos en results/. Se omite la generacion de charts.pdf.");
+        if (!Files.exists(arrayPath) || !Files.exists(singlyPath) || !Files.exists(doublyPath) || 
+            !Files.exists(stackArrayPath) || !Files.exists(stackListPath) || 
+            !Files.exists(queueArrayPath) || !Files.exists(queueListPath)) {
+            System.out.println("Faltan archivos JSON en results/. Genera todos los benchmarks primero.");
             return;
         }
 
@@ -83,6 +106,10 @@ public final class ChartGenerator {
             dataByStructure.put("array", readStructure(arrayPath));
             dataByStructure.put("singly", readStructure(singlyPath));
             dataByStructure.put("doubly", readStructure(doublyPath));
+            dataByStructure.put("stack_array", readStructure(stackArrayPath));
+            dataByStructure.put("stack_list", readStructure(stackListPath));
+            dataByStructure.put("queue_array", readStructure(queueArrayPath));
+            dataByStructure.put("queue_list", readStructure(queueListPath));
 
             Files.createDirectories(resultsDir);
             Path pdfPath = resultsDir.resolve("charts.pdf");
@@ -189,9 +216,9 @@ public final class ChartGenerator {
         yAxis.setSmallestValue(1);
 
         BarRenderer renderer = new BarRenderer();
-        renderer.setSeriesPaint(0, SERIES_COLORS.get("array"));
-        renderer.setSeriesPaint(1, SERIES_COLORS.get("singly"));
-        renderer.setSeriesPaint(2, SERIES_COLORS.get("doubly"));
+        for(int i = 0; i < STRUCTURES.length; i++) {
+            renderer.setSeriesPaint(i, SERIES_COLORS.get(STRUCTURES[i]));
+        }
 
         CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
         plot.setBackgroundPaint(Color.WHITE);
@@ -215,9 +242,9 @@ public final class ChartGenerator {
     }
 
     private static void applySeriesStyles(XYLineAndShapeRenderer renderer) {
-        renderer.setSeriesPaint(0, SERIES_COLORS.get("array"));
-        renderer.setSeriesPaint(1, SERIES_COLORS.get("singly"));
-        renderer.setSeriesPaint(2, SERIES_COLORS.get("doubly"));
+        for(int i = 0; i < STRUCTURES.length; i++) {
+            renderer.setSeriesPaint(i, SERIES_COLORS.get(STRUCTURES[i]));
+        }
 
         renderer.setDefaultShapesVisible(true);
         renderer.setDefaultShapesFilled(true);

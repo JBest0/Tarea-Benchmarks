@@ -13,11 +13,16 @@ import structures.DoublyLinkedList;
 import structures.DynamicArray;
 import structures.IntStructure;
 import structures.SinglyLinkedList;
+import structures.StackArray;
+import structures.StackList;
+import structures.QueueArray;
+import structures.QueueList;
 
 public class Benchmark {
     private static final int[] SIZES = {10, 100, 1000, 10000};
     private static final int RUNS = 5;
 
+    // Se agregan las operaciones de los escenarios 1 y 2
     private static final String[] TIMED_OPERATIONS = {
             "insertFirst",
             "insertLast",
@@ -27,7 +32,11 @@ public class Benchmark {
             "get",
             "replace",
             "size",
-            "clear"
+            "clear",
+            "insertar_accion",
+            "deshacer_accion",
+            "insertar_cliente",
+            "atender_cliente"
     };
 
     private static volatile long blackHole;
@@ -47,6 +56,10 @@ public class Benchmark {
         runExperimentsForStructure("array", resultsDir);
         runExperimentsForStructure("singly", resultsDir);
         runExperimentsForStructure("doubly", resultsDir);
+        runExperimentsForStructure("stack_array", resultsDir);
+        runExperimentsForStructure("stack_list", resultsDir);
+        runExperimentsForStructure("queue_array", resultsDir);
+        runExperimentsForStructure("queue_list", resultsDir);
     }
 
     private void runExperimentsForStructure(String structureName, Path resultsDir) {
@@ -63,7 +76,7 @@ public class Benchmark {
         System.out.println("\n============================================================");
         System.out.println("Estructura: " + structureName + " | n=" + n + " | corridas=" + RUNS);
         System.out.println("============================================================");
-        System.out.printf("%-14s %-18s %-18s %-8s%n", "Operacion", "Promedio", "Desv. Estandar", "Unidad");
+        System.out.printf("%-18s %-18s %-18s %-8s%n", "Operacion", "Promedio", "Desv. Estandar", "Unidad");
 
         OperationResult[] operationResults = new OperationResult[TIMED_OPERATIONS.length + 1];
         int opIndex = 0;
@@ -111,18 +124,22 @@ public class Benchmark {
                 ? String.format(Locale.US, "%.0f", result.stddev)
                 : String.format(Locale.US, "%.2f", result.stddev);
 
-        System.out.printf(Locale.US, "%-14s %-18s %-18s %-8s%n",
+        System.out.printf(Locale.US, "%-18s %-18s %-18s %-8s%n",
                 result.name,
                 avgText,
                 stdText,
                 result.unit);
     }
 
-    private IntStructure createStructure(String structureName) {
+private IntStructure createStructure(String structureName) {
         return switch (structureName) {
             case "array" -> new DynamicArray();
             case "singly" -> new SinglyLinkedList();
             case "doubly" -> new DoublyLinkedList();
+            case "stack_array" -> new StackArray(); 
+            case "stack_list" -> new StackList(); 
+            case "queue_array" -> new QueueArray(); 
+            case "queue_list" -> new QueueList(); 
             default -> throw new IllegalArgumentException("Estructura desconocida: " + structureName);
         };
     }
@@ -143,6 +160,8 @@ public class Benchmark {
                 return end - start;
 
             case "insertLast":
+            case "insertar_accion": // Escenario 1
+            case "insertar_cliente": // Escenario 2
                 structure.clear();
                 start = System.nanoTime();
                 for (int i = 0; i < n; i++) {
@@ -171,6 +190,26 @@ public class Benchmark {
                 }
                 end = System.nanoTime();
                 blackHole ^= checksum;
+                return end - start;
+                
+            case "deshacer_accion":
+                structure.clear();
+                populateSequential(structure, n);
+                start = System.nanoTime();
+                for (int i = 0; i < n; i++) {
+                    structure.delete(n - 1 - i); 
+                }
+                end = System.nanoTime();
+                return end - start;
+                
+            case "atender_cliente": 
+                structure.clear();
+                populateSequential(structure, n);
+                start = System.nanoTime();
+                for (int i = 0; i < n; i++) {
+                    structure.delete(0); 
+                }
+                end = System.nanoTime();
                 return end - start;
 
             case "search":
