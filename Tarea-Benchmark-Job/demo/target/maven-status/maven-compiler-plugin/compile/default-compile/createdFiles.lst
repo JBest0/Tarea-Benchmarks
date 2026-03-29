@@ -1,0 +1,10 @@
+structures\DoublyLinkedList.class
+benchmark\Main.class
+structures\SinglyLinkedList$Node.class
+structures\DynamicArray.class
+benchmark\Benchmark$OperationResult.class
+structures\IntStructure.class
+structures\SinglyLinkedList.class
+benchmark\Benchmark$ExperimentResult.class
+benchmark\Benchmark.class
+structures\DoublyLinkedList$Node.class
