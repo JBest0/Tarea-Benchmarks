@@ -1,0 +1,134 @@
+[
+  {
+    "tamano": 10,
+    "tiempos": {
+      "insertarInicio": {
+        "doble": {"promedio": 440, "valores": [1500, 200, 200, 200, 100]},
+        "circular": {"promedio": 260, "valores": [700, 200, 200, 100, 100]}
+      },
+      "insertarFinal": {
+        "doble": {"promedio": 140, "valores": [100, 100, 200, 100, 200]},
+        "circular": {"promedio": 120, "valores": [200, 100, 100, 100, 100]}
+      },
+      "insertarMedio": {
+        "doble": {"promedio": 540, "valores": [1500, 400, 300, 200, 300]},
+        "circular": {"promedio": 360, "valores": [900, 300, 200, 200, 200]}
+      },
+      "buscar": {
+        "doble": {"promedio": 480, "valores": [1700, 200, 300, 100, 100]},
+        "circular": {"promedio": 420, "valores": [1100, 300, 300, 200, 200]}
+      },
+      "reemplazar": {
+        "doble": {"promedio": 400, "valores": [1000, 300, 200, 200, 300]},
+        "circular": {"promedio": 300, "valores": [700, 200, 200, 200, 200]}
+      },
+      "eliminar": {
+        "doble": {"promedio": 300, "valores": [900, 300, 100, 100, 100]},
+        "circular": {"promedio": 380, "valores": [800, 400, 300, 200, 200]}
+      }
+    },
+    "memoria": {
+      "doble": 1006656,
+      "circular": 83896
+    }
+  },
+  {
+    "tamano": 100,
+    "tiempos": {
+      "insertarInicio": {
+        "doble": {"promedio": 400, "valores": [500, 900, 200, 200, 200]},
+        "circular": {"promedio": 200, "valores": [200, 300, 100, 200, 200]}
+      },
+      "insertarFinal": {
+        "doble": {"promedio": 120, "valores": [200, 100, 100, 100, 100]},
+        "circular": {"promedio": 120, "valores": [200, 100, 100, 100, 100]}
+      },
+      "insertarMedio": {
+        "doble": {"promedio": 1020, "valores": [1500, 900, 900, 900, 900]},
+        "circular": {"promedio": 880, "valores": [1100, 900, 800, 800, 800]}
+      },
+      "buscar": {
+        "doble": {"promedio": 1140, "valores": [1300, 1100, 1100, 1100, 1100]},
+        "circular": {"promedio": 1180, "valores": [1300, 1100, 1200, 1100, 1200]}
+      },
+      "reemplazar": {
+        "doble": {"promedio": 1240, "valores": [1600, 1200, 1100, 1200, 1100]},
+        "circular": {"promedio": 1280, "valores": [1400, 1300, 1200, 1300, 1200]}
+      },
+      "eliminar": {
+        "doble": {"promedio": 100, "valores": [200, 100, 100, 100, 0]},
+        "circular": {"promedio": 1420, "valores": [1500, 1400, 1400, 1400, 1400]}
+      }
+    },
+    "memoria": {
+      "doble": 28400,
+      "circular": 18480
+    }
+  },
+  {
+    "tamano": 1000,
+    "tiempos": {
+      "insertarInicio": {
+        "doble": {"promedio": 280, "valores": [400, 300, 200, 200, 300]},
+        "circular": {"promedio": 180, "valores": [200, 300, 200, 100, 100]}
+      },
+      "insertarFinal": {
+        "doble": {"promedio": 100, "valores": [100, 100, 100, 100, 100]},
+        "circular": {"promedio": 100, "valores": [200, 0, 100, 100, 100]}
+      },
+      "insertarMedio": {
+        "doble": {"promedio": 5660, "valores": [6000, 5900, 5400, 5700, 5300]},
+        "circular": {"promedio": 5840, "valores": [5800, 6200, 5700, 5900, 5600]}
+      },
+      "buscar": {
+        "doble": {"promedio": 9680, "valores": [4300, 11100, 11100, 10900, 11000]},
+        "circular": {"promedio": 10080, "valores": [4400, 11500, 11500, 11500, 11500]}
+      },
+      "reemplazar": {
+        "doble": {"promedio": 10760, "valores": [10800, 10700, 10800, 10700, 10800]},
+        "circular": {"promedio": 11920, "valores": [12000, 11900, 11900, 11900, 11900]}
+      },
+      "eliminar": {
+        "doble": {"promedio": 100, "valores": [200, 100, 100, 0, 100]},
+        "circular": {"promedio": 11880, "valores": [4700, 13800, 13600, 13600, 13700]}
+      }
+    },
+    "memoria": {
+      "doble": 45984,
+      "circular": 30232
+    }
+  },
+  {
+    "tamano": 10000,
+    "tiempos": {
+      "insertarInicio": {
+        "doble": {"promedio": 560, "valores": [400, 300, 900, 800, 400]},
+        "circular": {"promedio": 300, "valores": [200, 200, 400, 400, 300]}
+      },
+      "insertarFinal": {
+        "doble": {"promedio": 120, "valores": [100, 200, 100, 100, 100]},
+        "circular": {"promedio": 60, "valores": [100, 0, 100, 0, 100]}
+      },
+      "insertarMedio": {
+        "doble": {"promedio": 58360, "valores": [63600, 65900, 46500, 45900, 69900]},
+        "circular": {"promedio": 67560, "valores": [73500, 75100, 55500, 57400, 76300]}
+      },
+      "buscar": {
+        "doble": {"promedio": 10680, "valores": [7900, 18000, 25800, 1300, 400]},
+        "circular": {"promedio": 12660, "valores": [8100, 20800, 32600, 1400, 400]}
+      },
+      "reemplazar": {
+        "doble": {"promedio": 100860, "valores": [110100, 81800, 100500, 100800, 111100]},
+        "circular": {"promedio": 100500, "valores": [121800, 95900, 97100, 93700, 94000]}
+      },
+      "eliminar": {
+        "doble": {"promedio": 360, "valores": [1000, 300, 300, 100, 100]},
+        "circular": {"promedio": 8660, "valores": [1200, 8300, 14900, 14400, 4500]}
+      }
+    },
+    "memoria": {
+      "doble": 1048576,
+      "circular": 280616
+    }
+  }
+]
